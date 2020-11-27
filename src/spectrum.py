@@ -74,6 +74,7 @@ def calculate_mean_std(real_folder, fake_folder):
     std_f = np.sqrt(variance_f)
 
     return log_scale(mean_r), log_scale(std_r), log_scale(mean_f), log_scale(std_f)
+    # return 20*log_scale(mean_r), 20*log_scale(mean_f)
 
 
 def dct2(array):
@@ -84,6 +85,9 @@ def dct2(array):
     array = fftpack.dct(array, type=2, norm="ortho", axis=0)
     array = fftpack.dct(array, type=2, norm="ortho", axis=1)
     return array
+    # f = np.fft.fft2(array)
+    # fshift = np.fft.fftshift(f)
+    # return fshift
 
 
 def log_scale(array, epsilon=1e-12):
@@ -117,10 +121,20 @@ def main():
     data_folder = os.path.abspath("C:\\Users\\Tim\\git-repos\\fake_polisher\\data")
     real_folder = os.path.join(data_folder, "test\\real")
     fake_folder = os.path.join(data_folder, "test\\fake")
-    # real_folder = os.path.join(data_folder, "real_and_fake_face\\training_real")
-    # fake_folder = os.path.join(data_folder, "real_and_fake_face\\training_fake")
+
+    real_folder = os.path.join(data_folder, "real_and_fake_face\\training_real")
+    fake_folder = os.path.join(data_folder, "real_and_fake_face\\training_fake")
     m_r, s_r, m_f, s_f = calculate_mean_std(real_folder, fake_folder)
     plot_heatmaps(m_r, s_r, m_f, s_f)
+    """
+    magnitude_r, magnitude_f = calculate_mean_std(real_folder, fake_folder)
+    plt.subplot(121), plt.imshow(magnitude_r, cmap='gray')
+    plt.title('Real Image'), plt.xticks([]), plt.yticks([])
+    plt.subplot(122), plt.imshow(magnitude_f, cmap='gray')
+    plt.title('Fake Image'), plt.xticks([]), plt.yticks([])
+    plt.show()
+    print("Test")
+    """
 
 
 if __name__ == '__main__':
