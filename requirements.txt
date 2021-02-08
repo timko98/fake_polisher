@@ -1,0 +1,11 @@
+future==0.18.2                  
+imageio==2.9.0                  
+matplotlib==3.1.1                
+numpy==1.16.2                   
+Pillow==8.0.1                   
+scikit-image==0.17.2            
+scikit-learn==0.23.2            
+scipy==1.5.4                    
+torch==1.6.0+cu101              
+torchvision==0.7.0+cu101        
+tqdm==4.53.0                    
